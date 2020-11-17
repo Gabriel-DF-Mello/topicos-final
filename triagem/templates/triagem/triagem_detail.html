@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+	{% include 'triagem/includes/_barra_botoes.html' %}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Atendente: {{ object.atendente }}
+		</div>
+		<table class="table table-hover">
+			<tbody>
+				<tr>
+					<td>Data e hora:</td>
+					<td>Número {{ object.codigo }} em {{ object.data|date:'d/m/Y' }} às {{ object.hora }}</td>
+				</tr>
+				<tr>
+					<td>Paciente:</td>
+					<td>Nome: {{ object.nome }}</td>
+					<td>Idade: {{ object.idade }}</td>
+					<td>Altura: {{ object.altura }}</td>
+					<td>Peso: {{ object.peso }}</td>
+					<td>IMC: {{ object.imc }}</td>
+				</tr>
+				<tr>
+					<td>Fator de Risco:</td>
+					<td>
+						{% if object.risco == 0 %}
+							Nenhum
+						{% elif object.risco == 1 %}
+							Baixo
+						{% elif object.risco == 2 %}
+							Médio
+						{% else %}
+							Alto
+						{% endif %}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	{% include 'triagem/includes/_barra_botoes.html' %}
+{% endblock %}

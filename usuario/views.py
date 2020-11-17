@@ -9,7 +9,7 @@ from django.views.generic import ListView, TemplateView, DetailView, RedirectVie
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
-from utils.decorators import LoginRequiredMixin, StaffRequiredMixin, SecretariaRequiredMixin
+from utils.decorators import LoginRequiredMixin, StaffRequiredMixin
 
 from .models import Usuario
 
@@ -18,7 +18,7 @@ class UsuarioListView(LoginRequiredMixin, ListView):
     model = Usuario
 
 
-class UsuarioCreateView(LoginRequiredMixin, SecretariaRequiredMixin, CreateView):
+class UsuarioCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView):
     model = Usuario
     fields = ['tipo', 'nome', 'email', 'celular', 'endereco', 'password', 'is_active']
     success_url = 'usuario_list'
@@ -28,7 +28,7 @@ class UsuarioCreateView(LoginRequiredMixin, SecretariaRequiredMixin, CreateView)
         return reverse(self.success_url)
 
 
-class UsuarioUpdateView(LoginRequiredMixin, SecretariaRequiredMixin, UpdateView):
+class UsuarioUpdateView(LoginRequiredMixin, StaffRequiredMixin, UpdateView):
     model = Usuario
     fields = ['tipo', 'nome', 'email', 'celular', 'endereco', 'is_active']
     success_url = 'usuario_list'
